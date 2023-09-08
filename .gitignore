@@ -1,0 +1,8 @@
+# ignore executable files
+*.out
+
+# ignore emacs buffers
+*#
+*~
+*test.c
+*chat.c
