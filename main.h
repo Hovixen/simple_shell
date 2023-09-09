@@ -7,8 +7,9 @@
 #include <string.h>
 #include <sys/wait.h>
 
-void dis_pmpt(void);
-void promptexec(const char *cmd);
+void dis_pmpt(char **avec);
+void promptexec(const char *cmd, const char *avec);
+void handle_in(char **cmd_in, size_t *n);
 
 
 #endif
