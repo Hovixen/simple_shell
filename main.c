@@ -7,8 +7,10 @@
  * Return: returns 0 always success
  */
 
-int main(int ac, char **avec)
+int main(int ac, char *avec[])
 {
-	dis_pmpt(avec);
+	bshell param = init_bshell(avec);
+
+	dis_pmpt(&param);
 	return (0);
 }

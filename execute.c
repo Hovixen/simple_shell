@@ -2,16 +2,15 @@
 
 /**
  * promptexec - Function process and executes the command input
- * @cmd: command parameter passed
- * @avec: string pointer to the argument vector
+ * @param: pointer to the struct
  * Description: This function would create a fork process for
  * the user input command and execute it
  * Return: return void
  */
-void promptexec(const char *cmd, const char *avec)
+int promptexec(bshell *param)
 {
-	int stat;
-	char *execom[] = {(char *)cmd, NULL};
+	int stat, status;
+	char **execom = argTok(param->cmd_in);
 	pid_t bokangsh_pid = fork();/*shell child proccess*/
 
 	if (bokangsh_pid == -1)
@@ -24,10 +23,20 @@ void promptexec(const char *cmd, const char *avec)
 		if (execve(execom[0], execom, NULL) == -1)
 		{
 			/*perror((const char *)&avec[0]);*/
-			perror(avec);
+			perror(param->avec);
 			exit(EXIT_FAILURE);
 		}
 	}
 	else
-		waitpid(bokangsh_pid, &stat, 0);
+	{
+		if (waitpid(bokangsh_pid, &status, 0) == -1)
+		{
+			perror("waitpid");
+			exit(EXIT_FAILURE);
+		}
+		if (WIFEXITED(status))
+			stat = WEXITSTATUS(status);
+	}
+	free_arg(execom);
+	return (stat);
 }

@@ -2,35 +2,33 @@
 
 /**
  * dis_pmpt - displays the prompt of the shell in an infinite loop
- * @avec: points to the argument vector passed
- * Description: this functions displays the prompt, gets user input
- * and also calls the process execution function to execute user input
+ * @param: points to the struct with defined members
+ * Description: this function calls necessary functions and run them in
+ * infinite loop. e.g prompt display function, handling and executing
+ * the user input command e.t.c
  * Return: returns void.
  */
-void dis_pmpt(char **avec)
+void dis_pmpt(bshell *param)
 {
-	char *inst = "bokangsh $: ";
-	char *cmd_in = NULL;
 	size_t n = 0; /*length of the input given*/
 	int prompt = 1;
 
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			write(STDOUT_FILENO, inst, strlen(inst));
-		else if (cmd_in == NULL || strlen(cmd_in) == 0)
+			pmptdis();
+		else if (param->cmd_in == NULL || strlen(param->cmd_in) == 0)
 		{
-			free(cmd_in);
-			cmd_in = NULL;
+			free(param->cmd_in);
+			param->cmd_in = NULL;
 		}
 		else
 		{
 			if (!prompt)
-				write(STDOUT_FILENO, inst, strlen(inst));
+				pmptdis();
 			prompt = 0;
 		}
-		handle_in(&cmd_in, &n);
-		promptexec(cmd_in, *avec);
+		handle_in(param, &n);
 	}
-	free(cmd_in);
+	/*free(param->cmd_in);*/
 }

@@ -6,3 +6,7 @@
 *~
 *test.c
 *chat.c
+#test suites
+TEST_SUITE
+allowed_functions
+runchecker.bash
