@@ -20,6 +20,8 @@ int promptexec(bshell *param)
 	}
 	else if (bokangsh_pid == 0)
 	{
+		if (str_spn(param->cmd_in, DELIMS) == _strlen(param->cmd_in))
+			exit(EXIT_FAILURE);
 		if (execve(execom[0], execom, NULL) == -1)
 		{
 			/*perror((const char *)&avec[0]);*/

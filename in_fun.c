@@ -32,7 +32,7 @@ void handle_in(bshell *param, size_t *n)
  */
 void bprint(const char *input)
 {
-	write(STDOUT_FILENO, input, strlen(input));
+	write(STDOUT_FILENO, input, _strlen(input));
 }
 /**
  * pmptdis - Function displays the name of the shell
@@ -65,7 +65,7 @@ char **argTok(char *cmd)
 
 	while (tok_process != NULL && argnum < MAX_CMD_ARG)
 	{
-		cmdarr[argnum] = strdup(tok_process);
+		cmdarr[argnum] = str_dup(tok_process);
 		if (cmdarr[argnum] == NULL)
 		{
 			perror("strdup");

@@ -17,7 +17,7 @@ void dis_pmpt(bshell *param)
 	{
 		if (isatty(STDIN_FILENO))
 			pmptdis();
-		else if (param->cmd_in == NULL || strlen(param->cmd_in) == 0)
+		else if (param->cmd_in == NULL || _strlen(param->cmd_in) == 0)
 		{
 			free(param->cmd_in);
 			param->cmd_in = NULL;
@@ -26,7 +26,7 @@ void dis_pmpt(bshell *param)
 		{
 			if (!prompt)
 				pmptdis();
-			prompt = 0;
+			/*prompt = 0;*/
 		}
 		handle_in(param, &n);
 	}
