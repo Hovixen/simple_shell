@@ -9,6 +9,6 @@ bshell init_bshell(char **avec)
 	bshell memb;
 
 	memb.cmd_in = NULL;
-	memb.avec = avec[0];
+	memb.avec = avec;
 	return (memb);
 }

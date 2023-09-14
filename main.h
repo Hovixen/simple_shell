@@ -5,21 +5,29 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
+#include <stddef.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include <sys/stat.h>
+
 
 #define MAX_CMD_ARG 128
+#define MAX_BUFF 1024
 #define DELIMS "  \t\n"
+
+/*global variable*/
+
 /**
  * struct bShell - structure takes all the neccessary information
  * of the shell
  */
-
 typedef struct bokangsh
 {
-	char *cmd_in;
-	char *avec;
+	char *cmd_in;/* User command input*/
+	char **avec; /*main argument vector*/
+	char *path; 
 }bshell;
+
 /*shell core*/
 bshell init_bshell(char *avec[]);
 void dis_pmpt(bshell *param);
@@ -36,6 +44,11 @@ size_t _strlen(const char *cmd);
 char *str_cpy(char *dest, char *src);
 char *str_dup(char *cmd);
 size_t str_spn(const char *cmd, const char *sets);
+char *str_cat(char *dest, char *src);
 
+/*env & path*/
+int _iscmd_inPath(char *cmd, char *cmdPath);
 
+/*errors*/
+void execErr(char *cmd);
 #endif

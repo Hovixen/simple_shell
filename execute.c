@@ -9,36 +9,44 @@
  */
 int promptexec(bshell *param)
 {
-	int stat, status;
+	int stat, status, existing;
 	char **execom = argTok(param->cmd_in);
-	pid_t bokangsh_pid = fork();/*shell child proccess*/
+	char cmdPath[1024];
 
-	if (bokangsh_pid == -1)
+	existing = _iscmd_inPath(execom[0], cmdPath);
+	if (existing)
 	{
-		perror("fork");
-		exit(EXIT_FAILURE);
-	}
-	else if (bokangsh_pid == 0)
-	{
-		if (str_spn(param->cmd_in, DELIMS) == _strlen(param->cmd_in))
-			exit(EXIT_FAILURE);
-		if (execve(execom[0], execom, NULL) == -1)
+		pid_t bokangsh_pid = fork();/*shell child proccess*/
+
+		if (bokangsh_pid == -1)
 		{
-			/*perror((const char *)&avec[0]);*/
-			perror(param->avec);
+			perror("fork");
 			exit(EXIT_FAILURE);
+		}
+		else if (bokangsh_pid == 0)
+		{
+			/*if (str_spn(param->cmd_in, DELIMS) == _strlen(param->cmd_in))*/
+			 /* exit(EXIT_FAILURE);*/
+			if (execve(cmdPath, execom, NULL) == -1)
+			{
+				perror(param->avec[0]);
+				exit(EXIT_FAILURE);
+			}
+		}
+		else
+		{
+			if (waitpid(bokangsh_pid, &status, 0) == -1)
+			{
+				perror("waitpid");
+				exit(EXIT_FAILURE);
+			}
+			if (WIFEXITED(status))
+				stat = WEXITSTATUS(status);
 		}
 	}
 	else
-	{
-		if (waitpid(bokangsh_pid, &status, 0) == -1)
-		{
-			perror("waitpid");
-			exit(EXIT_FAILURE);
-		}
-		if (WIFEXITED(status))
-			stat = WEXITSTATUS(status);
-	}
+		execErr(execom[0]);
+	stat = -1;
 	free_arg(execom);
 	return (stat);
 }

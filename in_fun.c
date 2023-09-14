@@ -10,6 +10,7 @@
 void handle_in(bshell *param, size_t *n)
 {
 	ssize_t inRead = getline(&(param->cmd_in), n, stdin);
+	char *trim_cmd = param->cmd_in;
 
 	if (inRead == -1)
 	{
@@ -21,9 +22,20 @@ void handle_in(bshell *param, size_t *n)
 		}
 		exit(EXIT_FAILURE);
 	}
+	while ((*trim_cmd != '\0') && (*trim_cmd == ' ' || *trim_cmd == '\t'))
+		trim_cmd++;
+	if (*trim_cmd == '\0')
+	{
+		free(param->cmd_in);
+		param->cmd_in = NULL;
+		return;
+	}
 	if ((param->cmd_in)[inRead - 1] == '\n')
 		(param->cmd_in)[inRead - 1] = '\0';
-	promptexec(param);
+	if (*trim_cmd != '\0')
+		promptexec(param);
+	free(param->cmd_in);
+	param->cmd_in = NULL;
 }
 /**
  * bprint - Function prints string to the standard output
