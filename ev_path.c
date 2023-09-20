@@ -7,7 +7,7 @@
  */
 int _iscmd_inPath(char *cmd, char *cmdPath)
 {
-	char *bpath = getenv("PATH"); /*pointer to store the path*/
+	char *bpath = get_env("PATH"); /*pointer to store the path*/
 	char *bpath_cpy;/*points to memory allocated to store path*/
 	char *bpathTok;/*pointer to the tokenized command input*/
 	char *slash = strr_chr(cmd, '/');

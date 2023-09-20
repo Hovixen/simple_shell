@@ -73,12 +73,12 @@ int exe_stat(const char *Pathbuff);
 void exit_sh(void);
 void environment(void);
 int is_path(const char *Pathbuff);
+char *get_env (const char *env_name);
+
 
 /*errors*/
 int execErr(char *cmd, char *cmd_in, int counts);
 
 
 
-void bring_line(char **lineptr, size_t *n, char *buffer, size_t j);
-ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
 #endif
