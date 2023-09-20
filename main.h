@@ -80,5 +80,6 @@ char *get_env (const char *env_name);
 int execErr(char *cmd, char *cmd_in, int counts);
 
 
-
+char *_strtok(char str[], const char *delim);
+int cmp_chars(char str[], const char *delim);
 #endif
