@@ -26,7 +26,7 @@ int _iscmd_inPath(char *cmd, char *cmdPath)
 		exit(EXIT_FAILURE);
 	}
 	strcpy(bpath_cpy, bpath);
-	bpathTok = strtok(bpath_cpy, ":");
+	bpathTok = _strtok(bpath_cpy, ":");
 	while (bpathTok)
 	{
 		str_cpy(cmdPath, bpathTok);
@@ -37,7 +37,7 @@ int _iscmd_inPath(char *cmd, char *cmdPath)
 			return (1);
 		if (is_path(cmdPath))
 			return (1);
-		bpathTok = strtok(NULL, ":");
+		bpathTok = _strtok(NULL, ":");
 	}
 	free(bpath_cpy);
 	return (0);
