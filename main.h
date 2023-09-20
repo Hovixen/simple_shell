@@ -25,8 +25,8 @@ typedef struct bokangsh
 {
 	char *cmd_in;/* User command input*/
 	char **avec; /*main argument vector*/
-	char *path; 
-}bshell;
+	char *path;
+} bshell;
 
 /*shell core*/
 bshell init_bshell(char *avec[]);
