@@ -1,6 +1,12 @@
 #include "main.h"
-
-void execErr(char *cmd, char *cmd_in, int counts)
+/**
+ * execErr - function checks for error command not found
+ * @cmd: command input
+ * @cmd_in: command argument
+ * @counts: gives th error line count
+ * Return: returns void
+ */
+int execErr(char *cmd, char *cmd_in, int counts)
 {
 	int len;
 	char *errmsg;
@@ -27,4 +33,5 @@ void execErr(char *cmd, char *cmd_in, int counts)
 	write(STDOUT_FILENO, errmsg, _strlen(errmsg));
 	free(counter);
 	free(errmsg);
+	return (127);
 }

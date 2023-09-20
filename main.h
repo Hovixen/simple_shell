@@ -75,5 +75,5 @@ void environment(void);
 int is_path(const char *Pathbuff);
 
 /*errors*/
-void execErr(char *cmd, char *cmd_in, int counts);
+int execErr(char *cmd, char *cmd_in, int counts);
 #endif
