@@ -1,5 +1,10 @@
 #include "main.h"
 
+/**
+ *get_env - function gets the name of a path from environment
+ *@env_name: name of path in the environment
+ *Return: env
+ */
 
 char *get_env(const char *env_name)
 {
