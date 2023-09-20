@@ -29,14 +29,14 @@ char *conItoA(int num)
 	unsigned int n;
 	int len = numLen(num);
 	/*pointer to hold the string*/
-	char *buff = malloc(sizeof(char) * (len + 2));
+	char *buff = malloc(sizeof(char) * (len + 1));
 
 	if (buff == NULL)
 	{
 		perror("malloc");
 		return (NULL);
 	}
-	buff[len + 1] = '\0';
+	buff[len] = '\0';
 	if (num == 1)
 	{
 		buff[0] = '1';
