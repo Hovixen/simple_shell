@@ -19,14 +19,14 @@ int _iscmd_inPath(char *cmd, char *cmdPath)
 	}
 	if (slash)
 		cmd = (slash + 1);
-	bpath_cpy = malloc(_strlen(bpath) + _strlen(cmd) + 2);
+	bpath_cpy = malloc(_strlen(bpath) + strlen(cmd) + 2);
 	if (bpath_cpy == NULL)
 	{
 		perror("malloc");
 		exit(EXIT_FAILURE);
 	}
 	strcpy(bpath_cpy, bpath);
-	bpathTok = _strtok(bpath_cpy, ":");
+	bpathTok = strtok(bpath_cpy, ":");
 	while (bpathTok)
 	{
 		str_cpy(cmdPath, bpathTok);
@@ -37,7 +37,7 @@ int _iscmd_inPath(char *cmd, char *cmdPath)
 			return (1);
 		if (is_path(cmdPath))
 			return (1);
-		bpathTok = _strtok(NULL, ":");
+		bpathTok = strtok(NULL, ":");
 	}
 	free(bpath_cpy);
 	return (0);
