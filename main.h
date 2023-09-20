@@ -19,18 +19,25 @@
 extern char **environ;
 
 /**
- * struct bShell - structure takes all the neccessary information
+ * struct bokangsh - structure takes all the neccessary information
  * of the shell
+ * @cmd_in: User command input
+ * @avec: main argument vector
+ * @cmds: commands
+ * @path: path of the environment
+ * @res_counts: result counts
+ * @out_status: output status
  */
 typedef struct bokangsh
 {
 	char *cmd_in;/* User command input*/
 	char **avec;/*main argument vector*/
 	char **cmds;/*commands*/
-	char *path;
+	char *path; /*path of the environment*/
 	int out_status;/*output status*/
 	int res_counts;/*result counts*/
-}bshell;
+} bshell;
+
 
 /*shell core*/
 bshell init_bshell(char *avec[]);
@@ -63,8 +70,8 @@ void resize_buff(char **in_ptr, size_t *n, size_t nsize);
 /*env & path*/
 int _iscmd_inPath(char *cmd, char *cmdPath);
 int exe_stat(const char *Pathbuff);
-void exit_sh();
-void environment();
+void exit_sh(void);
+void environment(void);
 int is_path(const char *Pathbuff);
 
 /*errors*/

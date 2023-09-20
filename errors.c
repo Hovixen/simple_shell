@@ -1,6 +1,6 @@
 #include "main.h"
 
-void execErr(char *cmd, char *cmd_in, int counts) 
+void execErr(char *cmd, char *cmd_in, int counts)
 {
 	int len;
 	char *errmsg;
@@ -9,10 +9,9 @@ void execErr(char *cmd, char *cmd_in, int counts)
 	len = _strlen(cmd_in) + _strlen(counter);
 	len += _strlen(cmd) + 16;
 	errmsg = malloc(sizeof(char) * (len + 1));
-	
+
 	if (errmsg == NULL)
 	{
-//		free(errmsg);
 		free(counter);
 		return;
 	}

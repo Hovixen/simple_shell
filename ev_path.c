@@ -62,7 +62,7 @@ int exe_stat(const char *Pathbuff)
  * exit_sh - function exits the shell with the command "exit"
  * Return: returns void
  */
-void exit_sh()
+void exit_sh(void)
 {
 	exit(0);
 }
@@ -72,7 +72,7 @@ void exit_sh()
  * that prints all the environments in a system
  * Return: returns void
  */
-void environment()
+void environment(void)
 {
 	char **_env = environ;
 
@@ -82,7 +82,6 @@ void environment()
 		{
 			perror("write");
 			exit(EXIT_FAILURE);
-		
 		}
 		if (write(STDOUT_FILENO, "\n", 1) == -1)
 		{
@@ -93,7 +92,11 @@ void environment()
 	}
 
 }
-
+/**
+ * is_path - function checks if path exist in environment
+ * @Pathbuff: constructed environment path to be checked
+ * Return: returns 1 success or 0 failed
+ */
 int is_path(const char *Pathbuff)
 {
 	return ((access(Pathbuff, F_OK) == 0));

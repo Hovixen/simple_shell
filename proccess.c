@@ -3,8 +3,7 @@
  * fork_sh - function creates the child process of the shell
  * @cmd: command path parameter passed for execution
  * @args: comman argument passed for execution
- * @cmd_in: argument vector 
- * @n: status of the execution
+ * @cmd_in: argument vector
  * Return: returns the stat value of the process.
  */
 
@@ -12,7 +11,7 @@ int fork_sh(char *cmd, char **args, char *cmd_in)
 {
 	int status, stat;
 	pid_t bokangsh_pid = fork();/*shell child proccess*/
-	
+
 	if (bokangsh_pid == -1)
 	{
 		perror("fork");

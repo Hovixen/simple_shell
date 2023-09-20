@@ -10,9 +10,7 @@
 void handle_in(bshell *param, size_t *n)
 {
 	ssize_t inRead = getline(&(param->cmd_in), n, stdin);
-
 	char *trim_cmd = param->cmd_in;
-//	char *end = "exit";
 
 	if (inRead == -1)
 	{

@@ -19,7 +19,12 @@ char *str_cat(char *dest, char *src)
 	dest[d] = '\0';
 	return (dest);
 }
-
+/**
+ * *strr_chr - function checks the last occurance of a character
+ * @cmd: command string to check
+ * @c: integer to check against
+ * Return: returns pointer to the last occurance of the character
+ */
 char *strr_chr(char *cmd, int c)
 {
 	char *last_occur = NULL;

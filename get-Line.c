@@ -9,8 +9,8 @@
 ssize_t getLine(char **in_ptr, size_t *n, FILE *stream)
 {
 	static char in_buff[MAX_CMD_ARG];
-	static size_t buff_index = 0;
-	static size_t buff_size = 0;
+	static size_t buff_index;
+	static size_t buff_size;
 	size_t i = 0;
 	char c;
 
