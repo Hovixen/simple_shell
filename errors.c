@@ -1,8 +1,31 @@
 #include "main.h"
 
-void execErr(char *cmd)
+void execErr(char *cmd, char *cmd_in, int counts) 
 {
-	write(STDERR_FILENO, "Command not found: ", 19);
-	write(STDERR_FILENO, cmd, _strlen(cmd));
-	write(STDERR_FILENO, "\n", 1);
+	int len;
+	char *errmsg;
+	char *counter = conItoA(counts);
+
+	len = _strlen(cmd_in) + _strlen(counter);
+	len += _strlen(cmd) + 16;
+	errmsg = malloc(sizeof(char) * (len + 1));
+	
+	if (errmsg == NULL)
+	{
+//		free(errmsg);
+		free(counter);
+		return;
+	}
+
+	str_cpy(errmsg, cmd_in);
+	str_cat(errmsg, ": ");
+	str_cat(errmsg, counter);
+	str_cat(errmsg, ": ");
+	str_cat(errmsg, cmd);
+	str_cat(errmsg, ": not found\n");
+	str_cat(errmsg, "\0");
+
+	write(STDOUT_FILENO, errmsg, _strlen(errmsg));
+	free(counter);
+	free(errmsg);
 }

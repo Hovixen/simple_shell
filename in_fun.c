@@ -10,7 +10,9 @@
 void handle_in(bshell *param, size_t *n)
 {
 	ssize_t inRead = getline(&(param->cmd_in), n, stdin);
+
 	char *trim_cmd = param->cmd_in;
+//	char *end = "exit";
 
 	if (inRead == -1)
 	{
@@ -24,7 +26,7 @@ void handle_in(bshell *param, size_t *n)
 	}
 	while ((*trim_cmd != '\0') && (*trim_cmd == ' ' || *trim_cmd == '\t'))
 		trim_cmd++;
-	if (*trim_cmd == '\0')
+	if ((*trim_cmd == '\0'))
 	{
 		free(param->cmd_in);
 		param->cmd_in = NULL;
@@ -65,7 +67,7 @@ void pmptdis(void)
 char **argTok(char *cmd)
 {
 	int argnum = 0;/*counts the arguments*/
-	char *tok_process = strtok(cmd, " ");
+	char *tok_process = strtok(cmd, DELIMS);
 	/*array to hold tokenized argument*/
 	char **cmdarr = (char **)malloc(sizeof(char *) * (MAX_CMD_ARG + 1));
 
@@ -83,7 +85,7 @@ char **argTok(char *cmd)
 			perror("strdup");
 			exit(EXIT_FAILURE);
 		}
-		tok_process = strtok(NULL, " ");
+		tok_process = strtok(NULL, DELIMS);
 		argnum++;
 	}
 	cmdarr[argnum] = NULL;

@@ -11,3 +11,6 @@ TEST_SUITE
 allowed_functions
 runchecker.bash
 *hsh
+# ignore temp files
+*.swp
+*.o

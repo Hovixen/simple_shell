@@ -10,5 +10,8 @@ bshell init_bshell(char **avec)
 
 	memb.cmd_in = NULL;
 	memb.avec = avec;
+	memb.out_status = 0;
+	memb.cmds = NULL;
+	memb.res_counts = 1;
 	return (memb);
 }
