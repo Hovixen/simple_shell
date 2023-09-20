@@ -9,7 +9,10 @@
 
 int main(int ac, char *avec[])
 {
-	bshell param = init_bshell(avec);
+	bshell param;
+	(void)ac;
+
+	param = init_bshell(avec);
 
 	dis_pmpt(&param);
 	return (0);
