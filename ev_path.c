@@ -64,7 +64,7 @@ int exe_stat(const char *Pathbuff)
  */
 void exit_sh(void)
 {
-	exit(0);
+	exit(2);
 }
 /**
  * environment - function prints to standard output the environments

@@ -76,4 +76,9 @@ int is_path(const char *Pathbuff);
 
 /*errors*/
 int execErr(char *cmd, char *cmd_in, int counts);
+
+
+
+void bring_line(char **lineptr, size_t *n, char *buffer, size_t j);
+ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
 #endif
