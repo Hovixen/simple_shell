@@ -19,7 +19,7 @@ int execErr(char *cmd, char *cmd_in, int counts)
 	if (errmsg == NULL)
 	{
 		free(counter);
-		return;
+		return (-1);
 	}
 
 	str_cpy(errmsg, cmd_in);
