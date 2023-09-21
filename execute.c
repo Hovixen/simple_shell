@@ -19,7 +19,10 @@ int promptexec(bshell *param)
 		stat = fork_sh(cmdPath, execom, param->avec[0]);
 	}
 	else if (str_cmp(execom[0], "exit") == 0)
+	{
+		free_arg(execom);
 		exit_sh();
+	}
 	else if (str_cmp(execom[0], "env") == 0)
 		environment();
 	else

@@ -50,7 +50,10 @@ char *str_dup(char *cmd)
 	n = _strlen(cmd);
 	destptr = (char *)malloc(n + 1);/*adding a null terminator space*/
 	if (destptr == NULL)
+	{
+		perror("malloc");
 		return (NULL);
+	}
 	str_cpy(destptr, cmd);
 	return (destptr);
 }

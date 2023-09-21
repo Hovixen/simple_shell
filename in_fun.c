@@ -64,7 +64,7 @@ void pmptdis(void)
  */
 char **argTok(char *cmd)
 {
-	int argnum = 0;/*counts the arguments*/
+	int i, argnum = 0;/*counts the arguments*/
 	char *tok_process = strtok(cmd, DELIMS);
 	/*array to hold tokenized argument*/
 	char **cmdarr = (char **)malloc(sizeof(char *) * (MAX_CMD_ARG + 1));
@@ -81,6 +81,9 @@ char **argTok(char *cmd)
 		if (cmdarr[argnum] == NULL)
 		{
 			perror("strdup");
+			for (i = 0; i < argnum; i++)
+				free(cmdarr[i]);
+			free(cmdarr);
 			exit(EXIT_FAILURE);
 		}
 		tok_process = strtok(NULL, DELIMS);
