@@ -80,4 +80,6 @@ char *get_env(const char *env_name);
 int execErr(char *cmd, char *cmd_in, int counts);
 
 
+void resize_buff(char **in_ptr, size_t *n, size_t nsize);
+ssize_t getLine(char **in_ptr, size_t *n, FILE *stream);
 #endif

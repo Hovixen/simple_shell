@@ -20,20 +20,24 @@ void handle_in(bshell *param, size_t *n)
 			param->cmd_in = NULL;
 			exit(EXIT_SUCCESS);
 		}
-		exit(EXIT_FAILURE);
+		else
+			perror("getline");
 	}
-	while ((*trim_cmd != '\0') && (*trim_cmd == ' ' || *trim_cmd == '\t'))
-		trim_cmd++;
-	if ((*trim_cmd == '\0'))
+	else if (inRead > 0)
 	{
-		free(param->cmd_in);
-		param->cmd_in = NULL;
-		return;
+		while ((*trim_cmd != '\0') && (*trim_cmd == ' ' || *trim_cmd == '\t'))
+			trim_cmd++;
+		if ((*trim_cmd == '\0'))
+		{
+			free(param->cmd_in);
+			param->cmd_in = NULL;
+			return;
+		}
+		if ((param->cmd_in)[inRead - 1] == '\n')
+			(param->cmd_in)[inRead - 1] = '\0';
+		if (*trim_cmd != '\0')
+			promptexec(param);
 	}
-	if ((param->cmd_in)[inRead - 1] == '\n')
-		(param->cmd_in)[inRead - 1] = '\0';
-	if (*trim_cmd != '\0')
-		promptexec(param);
 	free(param->cmd_in);
 	param->cmd_in = NULL;
 }
@@ -55,6 +59,7 @@ void pmptdis(void)
 	char *input = "bokangsh $: ";
 
 	bprint(input);
+	fflush(stdout);
 }
 
 /**

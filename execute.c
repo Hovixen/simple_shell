@@ -20,7 +20,9 @@ int promptexec(bshell *param)
 	}
 	else if (str_cmp(execom[0], "exit") == 0)
 	{
+
 		free_arg(execom);
+		free(param->cmd_in);
 		exit_sh();
 	}
 	else if (str_cmp(execom[0], "env") == 0)
