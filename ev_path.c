@@ -34,9 +34,15 @@ int _iscmd_inPath(char *cmd, char *cmdPath)
 		strcat(cmdPath, cmd);
 
 		if (exe_stat(cmdPath))
+		{
+			free(bpath_cpy);
 			return (1);
+		}
 		if (is_path(cmdPath))
+		{
+			free(bpath_cpy);
 			return (1);
+		}
 		bpathTok = strtok(NULL, ":");
 	}
 	free(bpath_cpy);
