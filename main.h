@@ -73,7 +73,7 @@ int exe_stat(const char *Pathbuff);
 void exit_sh(void);
 void environment(void);
 int is_path(const char *Pathbuff);
-char *get_env (const char *env_name);
+char *get_env(const char *env_name);
 
 
 /*errors*/
