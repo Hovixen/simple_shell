@@ -7,7 +7,7 @@
  */
 int _iscmd_inPath(char *cmd, char *cmdPath)
 {
-	char *bpath = get_env("PATH"); /*pointer to store the path*/
+	char *bpath = getenv("PATH"); /*pointer to store the path*/
 	char *bpath_cpy;/*points to memory allocated to store path*/
 	char *bpathTok;/*pointer to the tokenized command input*/
 	char *slash = strr_chr(cmd, '/');
@@ -84,7 +84,7 @@ void environment(void)
 
 	while (*_env)
 	{
-		if (write(STDOUT_FILENO, *_env, strlen(*_env)) == -1)
+		if (write(STDOUT_FILENO, *_env, _strlen(*_env)) == -1)
 		{
 			perror("write");
 			exit(EXIT_FAILURE);

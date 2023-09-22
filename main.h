@@ -46,7 +46,14 @@ int promptexec(bshell *param);
 void handle_in(bshell *param, size_t *n);
 char **argTok(char *cmd);
 void free_arg(char **execom);
+
+
+/*process*/
+int processInput(bshell *param, char *cmd);
+int is_space(char *cmd);
 int fork_sh(char *cmd, char **args, char *cmd_in);
+int OR_file(char *f_name, char **f_content);
+
 
 
 void bprint(const char *input);

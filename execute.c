@@ -9,12 +9,14 @@
  */
 int promptexec(bshell *param)
 {
-	int stat, /*status,*/ existing;
+	int stat /*status,*/ /*existing*/;
 	char **execom = argTok(param->cmd_in);
 	char cmdPath[1024];
 
-	existing = _iscmd_inPath(execom[0], cmdPath);
-	if (existing)
+	/*existing = _iscmd_inPath(execom[0], cmdPath);*/
+	if (execom[0][0] == '.' && execom[0][1] == '/')
+		stat = fork_sh(execom[0], execom, param->avec[0]);
+	else if (_iscmd_inPath(execom[0], cmdPath))
 	{
 		stat = fork_sh(cmdPath, execom, param->avec[0]);
 	}
@@ -30,7 +32,6 @@ int promptexec(bshell *param)
 	else
 	{
 		execErr(execom[0], param->avec[0], param->res_counts);
-		/*exit(127);*/
 	}
 	stat = -1;
 	free_arg(execom);

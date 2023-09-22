@@ -10,6 +10,7 @@ size_t _strlen(const char *cmd)
 
 	if (cmd == NULL)
 	{
+		/*fprintf(stderr, "Error: Input string is NULL in _strlen\n");*/
 		perror("strlen");
 		exit(EXIT_FAILURE);
 	}

@@ -20,23 +20,30 @@ void handle_in(bshell *param, size_t *n)
 			param->cmd_in = NULL;
 			exit(EXIT_SUCCESS);
 		}
-		else
-			perror("getline");
+		exit(EXIT_FAILURE);
 	}
-	else if (inRead > 0)
+	while ((*trim_cmd != '\0') && (*trim_cmd == ' ' || *trim_cmd == '\t'))
+		trim_cmd++;
+	if ((*trim_cmd == '\0'))
 	{
-		while ((*trim_cmd != '\0') && (*trim_cmd == ' ' || *trim_cmd == '\t'))
-			trim_cmd++;
-		if ((*trim_cmd == '\0'))
-		{
-			free(param->cmd_in);
-			param->cmd_in = NULL;
-			return;
-		}
-		if ((param->cmd_in)[inRead - 1] == '\n')
-			(param->cmd_in)[inRead - 1] = '\0';
-		if (*trim_cmd != '\0')
-			promptexec(param);
+		free(param->cmd_in);
+		param->cmd_in = NULL;
+		return;
+	}
+	if ((param->cmd_in)[inRead - 1] == '\n')
+		(param->cmd_in)[inRead - 1] = '\0';
+	if (*trim_cmd != '\0')
+	{
+		/**
+		*if (is_space(trim_cmd))
+		*{
+			*if (processInput(param, trim_cmd) != 0)
+				*fprintf(stderr, "Failed to process input with space\n");
+			*promptexec(param);
+		*}
+		*else
+		*/
+		promptexec(param);
 	}
 	free(param->cmd_in);
 	param->cmd_in = NULL;
@@ -70,7 +77,7 @@ void pmptdis(void)
 char **argTok(char *cmd)
 {
 	int i, argnum = 0;/*counts the arguments*/
-	char *tok_process = strtok(cmd, DELIMS);
+	char *tok_process = strtok(cmd, " ");
 	/*array to hold tokenized argument*/
 	char **cmdarr = (char **)malloc(sizeof(char *) * (MAX_CMD_ARG + 1));
 
@@ -91,7 +98,7 @@ char **argTok(char *cmd)
 			free(cmdarr);
 			exit(EXIT_FAILURE);
 		}
-		tok_process = strtok(NULL, DELIMS);
+		tok_process = strtok(NULL, " ");
 		argnum++;
 	}
 	cmdarr[argnum] = NULL;
