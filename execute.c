@@ -29,10 +29,11 @@ int promptexec(bshell *param)
 		environment();
 	else
 	{
-//		if (execom[0][0] == '.' && execom[0][1] == '/')
-//			stat = fork_sh(execom[0], execom, param->avec[0]);
-//		else 
-//
+		/**
+		 * if (execom[0][0] == '.' && execom[0][1] == '/')
+		*	stat = fork_sh(execom[0], execom, param->avec[0]);
+		*else
+	       */
 		if (_iscmd_inPath(execom[0], cmdPath))
 		{
 			stat = fork_sh(cmdPath, execom, param->avec[0]);

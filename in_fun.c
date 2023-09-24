@@ -20,8 +20,10 @@ void handle_in(bshell *param, size_t *n)
 			param->cmd_in = NULL;
 			exit(EXIT_SUCCESS);
 		}
-//		free(param->cmd_in);
-//		param->cmd_in = NULL;
+		/**
+		 * free(param->cmd_in);
+		*param->cmd_in = NULL;
+		*/
 		exit(EXIT_FAILURE);
 	}
 	while ((*trim_cmd != '\0') && (*trim_cmd == ' ' || *trim_cmd == '\t'))
