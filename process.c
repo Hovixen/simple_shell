@@ -20,11 +20,16 @@ int fork_sh(char *cmd, char **args, char *cmd_in)
 	else if (bokangsh_pid == 0)
 	{
 		if (str_spn(cmd, DELIMS) == _strlen(cmd))
-			exit_sh();
+		{
+			free(cmd);
+			exit(EXIT_FAILURE);
+		}
 		if (execve(cmd, args, environ) == -1)
 		{
 			perror(cmd_in);
-			exit_sh();
+			free(args);
+			free(cmd);
+			exit(EXIT_FAILURE);
 		}
 	}
 	else

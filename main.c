@@ -15,5 +15,6 @@ int main(int ac, char *avec[])
 	param = init_bshell(avec);
 
 	dis_pmpt(&param);
+	free(param.cmd_in);
 	return (0);
 }

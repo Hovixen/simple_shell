@@ -12,10 +12,9 @@ int _iscmd_inPath(char *cmd, char *cmdPath)
 	char *bpathTok;/*pointer to the tokenized command input*/
 	char *slash = strr_chr(cmd, '/');
 
-	if (bpath == NULL || cmdPath == NULL)
+	if (bpath == NULL || bpath[0] == '\0')
 	{
-		perror("Invalid input");
-		exit(EXIT_FAILURE);
+		return (0);
 	}
 	if (slash)
 		cmd = (slash + 1);

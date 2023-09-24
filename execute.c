@@ -9,20 +9,18 @@
  */
 int promptexec(bshell *param)
 {
-	int stat /*status,*/ /*existing*/;
+	int stat = 0/*status,*/;
 	char **execom = argTok(param->cmd_in);
-	char cmdPath[1024];
+	char cmdPath[MAX_BUFF];
 
-	/*existing = _iscmd_inPath(execom[0], cmdPath);*/
-	if (execom[0][0] == '.' && execom[0][1] == '/')
-		stat = fork_sh(execom[0], execom, param->avec[0]);
-	else if (_iscmd_inPath(execom[0], cmdPath))
+	if (execom == NULL)
 	{
-		stat = fork_sh(cmdPath, execom, param->avec[0]);
+		free_arg(execom);
+		free(param->cmd_in);
+		return (0);
 	}
-	else if (str_cmp(execom[0], "exit") == 0)
+	if (str_cmp(execom[0], "exit") == 0)
 	{
-
 		free_arg(execom);
 		free(param->cmd_in);
 		exit_sh();
@@ -31,9 +29,23 @@ int promptexec(bshell *param)
 		environment();
 	else
 	{
-		execErr(execom[0], param->avec[0], param->res_counts);
+//		if (execom[0][0] == '.' && execom[0][1] == '/')
+//			stat = fork_sh(execom[0], execom, param->avec[0]);
+//		else 
+//
+		if (_iscmd_inPath(execom[0], cmdPath))
+		{
+			stat = fork_sh(cmdPath, execom, param->avec[0]);
+		}
+		else
+		{
+			stat = fork_sh(execom[0], execom, param->avec[0]);
+		}
+		if (stat == -1)
+		{
+			execErr(execom[0], param->avec[0], param->res_counts);
+		}
 	}
-	stat = -1;
 	free_arg(execom);
 	return (stat);
 }

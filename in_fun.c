@@ -20,6 +20,8 @@ void handle_in(bshell *param, size_t *n)
 			param->cmd_in = NULL;
 			exit(EXIT_SUCCESS);
 		}
+//		free(param->cmd_in);
+//		param->cmd_in = NULL;
 		exit(EXIT_FAILURE);
 	}
 	while ((*trim_cmd != '\0') && (*trim_cmd == ' ' || *trim_cmd == '\t'))
@@ -34,15 +36,6 @@ void handle_in(bshell *param, size_t *n)
 		(param->cmd_in)[inRead - 1] = '\0';
 	if (*trim_cmd != '\0')
 	{
-		/**
-		*if (is_space(trim_cmd))
-		*{
-			*if (processInput(param, trim_cmd) != 0)
-				*fprintf(stderr, "Failed to process input with space\n");
-			*promptexec(param);
-		*}
-		*else
-		*/
 		promptexec(param);
 	}
 	free(param->cmd_in);
